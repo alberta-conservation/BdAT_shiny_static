@@ -16,7 +16,11 @@ tagList(
     tabPanel("Species description", value = 'spp'),
     tabPanel("Vulnerability assessment", value = 'vulnerability'),
     tabPanel("Risk Assessment", value = 'risk'),
-    tabPanel("Recommendations", value = 'recommendations')
+    tabPanel("Recommendations", value = 'recommendations'), 
+    navbarMenu("Species of Concern", 
+               tabPanel("Overview", value = "soc"), 
+               tabPanel("Pileated woodpecker", value = "piwo")
+               )
   ), 
   
   tags$div(
@@ -58,7 +62,7 @@ tagList(
       column(12, 
              conditionalPanel(
                condition = "input.tabs == 'spp'",
-               div(id = "markdown-content", includeMarkdown("Rmd/text_spp_btnw.Rmd")))
+               div(id = "markdown-content", includeMarkdown("Rmd/text_spp_BlackthroatedGreenWarbler.md")))
       )
     )
   ),
@@ -87,7 +91,13 @@ tagList(
                           actionButton(inputId = "co_prodField", 
                                        label = "Show selected AOI and leases", 
                                        icon = icon(name = "fas fa-crow", lib = "font-awesome"), 
-                                       style="width:200px")
+                                       style="width:200px;"
+                                       ), 
+                          
+                          actionButton(inputId = "render_report", 
+                                       label = "Create report", 
+                                       style="margin-top: 20px; width: 200px;"
+                                       )
                  ), 
                  tabPanel("Instructions", 
                           icon = icon("circle-info"), 
@@ -115,8 +125,11 @@ tagList(
                           ), 
                           actionButton(inputId = "co_prodField", 
                                        label = "Show selected AOI and leases", 
-                                       icon = icon(name = "fas fa-crow", lib = "font-awesome"), 
-                                       style="width:200px")
+                                       style="width:200px"), 
+                          
+                          actionButton(inputId = "render_report", 
+                                       label = "Create report", 
+                                       style="margin-top: 20px; width: 200px;")
                  ), 
                  tabPanel("Instructions", 
                           icon = icon("circle-info"), 
@@ -161,12 +174,22 @@ tagList(
              conditionalPanel(
                condition = "input.tabs == 'vulnerability'",
                div(id = "markdown-content", includeMarkdown("Rmd/data_download_tab.md")), 
-               actionButton(inputId = "dwnld_dta", label = "Download Data", icon = icon(name = "fas fa-crow", lib = "font-awesome"), tyle="width:250px")
+               actionButton(inputId = "dwnld_dta", 
+                            label = "Download Data", 
+                            style="width: 250px;"), 
+               
+               actionButton(inputId = "dwnld_report", 
+                            label = "Download report", 
+                            style="margin-top: 20px;  width: 250px;")
              ), 
              conditionalPanel(
                condition = "input.tabs == 'risk'",
                div(id = "markdown-content", includeMarkdown("Rmd/risk_download_tab.md")), 
-               actionButton(inputId = "dwnld_dta", label = "Download Data", icon = icon(name = "fas fa-crow", lib = "font-awesome"), tyle="width:250px")
+               actionButton(inputId = "dwnld_dta", label = "Download Data", icon = icon(name = "fas fa-crow", lib = "font-awesome"), tyle="width:250px"), 
+               
+               actionButton(inputId = "dwnld_report", 
+                            label = "Download report", 
+                            style="margin-top: 20px;  width: 250px;")
              )
              ), 
       column(12,  
